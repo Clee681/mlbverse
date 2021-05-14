@@ -1,6 +1,6 @@
 <script context="module" lang="ts">
   export async function load({}) {
-    const res = await fetch("http://statsapi.mlb.com/api/v1/teams?sportId=1");
+    const res = await fetch("https://statsapi.mlb.com/api/v1/teams?sportId=1");
     if (res.ok) {
       const json = await res.json();
       return { props: { teams: json.teams } };
