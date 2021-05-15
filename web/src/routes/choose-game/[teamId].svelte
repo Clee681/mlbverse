@@ -51,7 +51,7 @@
   </button>
   <div class="grid grid-cols-1 gap-4 mb-14">
     {#each _games as g}
-      <div class="border border-gray-200 rounded-md p-4 flex">
+      <div class="border border-gray-200 rounded-md p-4 flex items-center">
         <div class="pl-2 pr-8 w-40">
           <h4 class="font-medium">{fmt(g.gameDate)}</h4>
           <p class="text-gray-400 text-sm uppercase">
@@ -60,9 +60,15 @@
             <span>{fmtTime(g.gameDate)}</span>
           </p>
         </div>
-        <div>
+        <div class="flex-grow">
           <h4 class="font-medium">{g.teams.away.team.name} @ {g.teams.home.team.name}</h4>
           <h6 class="text-gray-400 text-sm uppercase">{g.venue.name}</h6>
+        </div>
+        <div class="">
+          <button
+            class="px-4 py-2 text-sm text-white border rounded-md bg-gradient-to-r from-purple-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 focus:outline-none"
+            >View Tickets</button
+          >
         </div>
       </div>
     {/each}
