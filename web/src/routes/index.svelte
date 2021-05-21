@@ -15,8 +15,6 @@
   import { goto } from "$app/navigation";
   import type { StatsApiNS } from "$lib/types";
   export let teams: StatsApiNS.Team[];
-
-  console.log(teams);
 </script>
 
 <h2 class="text-center mt-20 text-4xl font-semibold text-gray-700">Get Your Tickets Now</h2>
