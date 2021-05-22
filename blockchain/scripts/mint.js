@@ -37,15 +37,15 @@ async function main() {
   } = await loadDeploymentInfo();
   const provider = new ethers.providers.JsonRpcProvider();
   const contract = new ethers.Contract(address, abi, provider.getSigner());
-  console.log(
-    await contract.balanceOf("0x3c44cdddb6a900fa2b585dd299e03d12fa4293bc")
-  );
-  console.log(await contract.tokenURI("1"));
-  // const id = await mintToken(
-  //   contract,
-  //   "0x3c44cdddb6a900fa2b585dd299e03d12fa4293bc",
-  //   "Qmce7YNMSSRTyhmfziAXtcrQwqHj7aRhib2rMcKdeLRe29"
+  // console.log(
+  //   await contract.balanceOf("0x3c44cdddb6a900fa2b585dd299e03d12fa4293bc")
   // );
+  // console.log(await contract.tokenURI("1"));
+  const id = await mintToken(
+    contract,
+    "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+    "QmVt96Z4Kb7i2zNtrk9JEkonRMLfEdrV2tUqH2ncbsWFhi"
+  );
   // console.log(id);
   // console.log(await contract.name());
   // console.log(await contract.ownerOf("1"));
