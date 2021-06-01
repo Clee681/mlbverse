@@ -14,6 +14,7 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
   import type { StatsApiNS } from "$lib/types";
+
   export let teams: StatsApiNS.Team[];
 </script>
 

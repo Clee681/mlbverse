@@ -1,28 +1,30 @@
 <script lang="ts">
-  import { ethProvider, currentAccount } from "$lib/stores/ethProvider";
+  import { ethProvider, currentAccount, connected } from "$lib/stores/ethProvider";
 
   const connect = () => {
     if ($ethProvider) {
-      $ethProvider.provider
-        .request({ method: "eth_requestAccounts" })
-        .then(([account]) => ($currentAccount = account))
-        .catch((error) => {
-          if (error.code === 4001) {
-            // EIP-1193 userRejectedRequest error
-            console.log("Please connect to MetaMask.");
-          } else {
-            console.error(error);
-          }
-        });
+      if ($connected) {
+        console.log("You are already connected!");
+      } else {
+        $ethProvider.provider
+          .request({ method: "eth_requestAccounts" })
+          .then(([account]) => ($currentAccount = account))
+          .catch((error) => {
+            if (error.code === 4001) {
+              // EIP-1193 userRejectedRequest error
+              console.log("Please connect to MetaMask.");
+            } else {
+              console.error(error);
+            }
+          });
+      }
     } else {
       console.error("Provider not found.");
     }
   };
-
-  $: connected = $currentAccount !== "";
 </script>
 
-{#if connected}
+{#if $connected}
   <div class="px-4 py-3 rounded-md text-sm border border-blue-300 text-blue-500">Wallet Connected</div>
 {:else}
   <button

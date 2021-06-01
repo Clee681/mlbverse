@@ -2,7 +2,7 @@ module.exports = {
   mode: "jit",
   purge: ["./src/**/*.{html,js,svelte,ts}"],
   theme: {
-    extend: {},
+    extend: { spacing: { 160: "40rem" } },
   },
   plugins: [],
 };

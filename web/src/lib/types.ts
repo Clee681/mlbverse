@@ -24,3 +24,23 @@ export namespace StatsApiNS {
     team: Team;
   };
 }
+
+export namespace MLBverseNS {
+  export type TicketsData = {
+    gamePk: string;
+    contract: TicketContract;
+  };
+
+  export type TicketContract = {
+    address: string;
+    signerAddress: string;
+    abi: string[];
+  };
+
+  export type Ticket = {
+    tokenId: string;
+    section: number;
+    row: number;
+    seat: number;
+  };
+}

@@ -1,10 +1,11 @@
-import { writable } from "svelte/store";
+import { derived, writable } from "svelte/store";
 import { browser } from "$app/env";
 import { ethers } from "ethers";
 import type { Web3Provider } from "@ethersproject/providers";
 
 export const ethProvider = writable<Web3Provider | undefined>(undefined);
 export const currentAccount = writable<string>("");
+export const connected = derived(currentAccount, ($currentAccount) => $currentAccount !== "");
 
 if (browser) {
   if (typeof window.ethereum !== "undefined") {

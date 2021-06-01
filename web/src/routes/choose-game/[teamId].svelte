@@ -65,9 +65,10 @@
           <h6 class="text-gray-400 text-sm uppercase">{g.venue.name}</h6>
         </div>
         <div class="">
-          <button
+          <a
+            href="/games/{g.gamePk}/tickets"
             class="px-4 py-2 text-sm text-white border rounded-md bg-gradient-to-r from-purple-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 focus:outline-none"
-            >View Tickets</button
+            >View Tickets</a
           >
         </div>
       </div>
