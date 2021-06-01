@@ -41,11 +41,17 @@ async function main() {
   //   await contract.balanceOf("0x3c44cdddb6a900fa2b585dd299e03d12fa4293bc")
   // );
   // console.log(await contract.tokenURI("1"));
+  // const id = await mintToken(
+  //   contract,
+  //   "0xA51c1fc2f0D1a1b8494Ed1FE312d7C3a78Ed91C0",
+  //   "QmVt96Z4Kb7i2zNtrk9JEkonRMLfEdrV2tUqH2ncbsWFhi"
+  // );
   const id = await mintToken(
     contract,
-    "0x610178dA211FEF7D417bC0e6FeD39F05609AD788",
-    "QmVt96Z4Kb7i2zNtrk9JEkonRMLfEdrV2tUqH2ncbsWFhi"
+    "0xA51c1fc2f0D1a1b8494Ed1FE312d7C3a78Ed91C0",
+    "QmQynbxTVqtv8d41SNKJjZozTGAtsz2B3s69BUpzMxLSsx"
   );
+
   // console.log(id);
   // console.log(await contract.name());
   // console.log(await contract.ownerOf("1"));

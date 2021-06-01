@@ -50,6 +50,7 @@ contract Tickets is ERC721URIStorage, ERC721Enumerable, ERC721Holder, Ownable {
     // Can only buy tickets that are owned by this contract
     require(ownerOf(_tokenId) == address(this));
 
+    _approve(msg.sender, _tokenId);
     safeTransferFrom(address(this), msg.sender, _tokenId);
   }
 
