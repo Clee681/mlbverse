@@ -15,6 +15,7 @@
   import { ethers } from "ethers";
   import type { MLBverseNS } from "$lib/types";
   import TicketTableRow from "$lib/components/TicketTableRow.svelte";
+  import { ipfsUrl } from "$lib/utils";
 
   export let data: MLBverseNS.TicketsData;
 
@@ -30,23 +31,22 @@
     }
   }
 
-  function ipfsUrl(tokenURI: string): string {
-    return `https://ipfs.io/ipfs/${tokenURI.slice(7)}`;
-  }
-
   async function setTickets() {
     const totalSupply = await contract.totalSupply();
     let tokens = [];
     for (let i = 0; i < totalSupply; i++) {
       const tokenId = await contract.tokenByIndex(i);
       const tokenURI = await contract.tokenURI(tokenId);
-      tokens.push({ tokenId, tokenURI });
+      const owner = await contract.ownerOf(tokenId);
+      tokens.push({ tokenId, tokenURI, owner });
     }
-    const ticketPromises = tokens.map(({ tokenId, tokenURI }) =>
-      fetch(ipfsUrl(tokenURI))
-        .then((r) => r.json())
-        .then((j) => ({ ...j, tokenId }))
-    );
+    const ticketPromises = tokens
+      .filter((t) => t.owner === data.contract.address)
+      .map(({ tokenId, tokenURI }) =>
+        fetch(ipfsUrl(tokenURI))
+          .then((r) => r.json())
+          .then((j) => ({ ...j, tokenId }))
+      );
     Promise.all(ticketPromises).then((ts) => (tickets = ts));
   }
 
@@ -76,6 +76,11 @@
         {#each tickets as ticket}
           <TicketTableRow {ticket} buyCallback={() => buyTicket(ticket.tokenId)} />
         {/each}
+        {#if tickets.length === 0}
+          <tr>
+            <td class="py-8 text-center text-gray-500" colspan="5">No tickets available</td>
+          </tr>
+        {/if}
       </tbody>
     </table>
   </div>
