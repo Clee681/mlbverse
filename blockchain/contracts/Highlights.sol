@@ -6,12 +6,14 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
+import "./Tickets.sol";
 
-contract Tickets is ERC721URIStorage, ERC721Enumerable, ERC721Holder, Ownable {
+contract Highlights is ERC721URIStorage, ERC721Enumerable, ERC721Holder, Ownable {
   using Counters for Counters.Counter;
   Counters.Counter private _tokenIds;
+  Tickets private _ticketsContract;
 
-  constructor() ERC721("Tickets", "TICK") {
+  constructor() ERC721("Highlights", "FIELD_VISION") {
   }
 
   function _baseURI() internal view virtual override returns (string memory) {
@@ -46,17 +48,19 @@ contract Tickets is ERC721URIStorage, ERC721Enumerable, ERC721Holder, Ownable {
 
   // Custom
 
-  function buyTicket(uint256 _tokenId) external payable {
-    // Hardcoded ticket price for prototype
-    require(msg.value == 1 ether);
-    // Can only buy tickets that are owned by this contract
-    require(ownerOf(_tokenId) == address(this));
+  mapping (uint256 => bool) public redeemedTickets;
+
+  function redeem(uint256 _ticketId, uint256 _tokenId) external {
+    require(!redeemedTickets[_ticketId], "Ticket has already been redeemed");
+    require(ownerOf(_tokenId) == address(this), "Token is not available for redemption");
+    require(_ticketsContract.ownerOf(_ticketId) == msg.sender, "Not ticket owner");
+    redeemedTickets[_ticketId] = true;
 
     _approve(msg.sender, _tokenId);
     safeTransferFrom(address(this), msg.sender, _tokenId);
   }
 
-  function withdraw() external onlyOwner {
-    payable(msg.sender).transfer(address(this).balance);
+  function setTicketsContract(address _ticketsContractAddress) public onlyOwner {
+    _ticketsContract = Tickets(_ticketsContractAddress);
   }
 }
