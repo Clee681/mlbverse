@@ -1,11 +1,13 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import "@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
-contract Tickets is ERC721URIStorage, ERC721Enumerable {
+contract Tickets is ERC721URIStorage, ERC721Enumerable, ERC721Holder, Ownable {
   using Counters for Counters.Counter;
   Counters.Counter private _tokenIds;
 
@@ -40,5 +42,18 @@ contract Tickets is ERC721URIStorage, ERC721Enumerable {
     _setTokenURI(id, metadataURI);
 
      return id;
+  }
+
+  function buyTicket(uint256 _tokenId) external payable {
+    // Hardcoded ticket price for prototype
+    require(msg.value == 1 ether);
+    // Can only buy tickets that are owned by this contract
+    require(ownerOf(_tokenId) == address(this));
+
+    safeTransferFrom(address(this), msg.sender, _tokenId);
+  }
+
+  function withdraw() external onlyOwner {
+    payable(msg.sender).transfer(address(this).balance);
   }
 }

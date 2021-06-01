@@ -43,7 +43,7 @@ async function main() {
   // console.log(await contract.tokenURI("1"));
   const id = await mintToken(
     contract,
-    "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+    "0x610178dA211FEF7D417bC0e6FeD39F05609AD788",
     "QmVt96Z4Kb7i2zNtrk9JEkonRMLfEdrV2tUqH2ncbsWFhi"
   );
   // console.log(id);
