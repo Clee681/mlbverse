@@ -78,7 +78,9 @@
     <div class="flex flex-col flex-1 gap-4">
       {#if highlight}
         <div class="w-full border border-gray-300 rounded-md">
-          <img class="w-full rounded-md" src={highlight.image} alt="Field Vision" />
+          <video class="w-full rounded-md" autoplay loop src={highlight.animation_url}>
+            <track kind="captions" />
+          </video>
         </div>
         <div>
           <h2 class="text-3xl text-gray-700 font-semibold my-2">{highlight.name}</h2>
