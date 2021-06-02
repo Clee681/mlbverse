@@ -77,11 +77,15 @@
   <div class="px-32 flex flex-col lg:flex-row gap-4 mt-12">
     <div class="flex flex-col flex-1 gap-4">
       <div class="w-full border border-gray-300 rounded-md">
-        <img
-          class="w-full rounded-md"
-          src="https://lh3.googleusercontent.com/iJoQL40UzY-pBR7ijC7fXYYiKCqHnLo24_WLmwFsItCv3q5K3Mya0wMDy32fUvO9pHg0KBfrnpaU2Cf-pptQOzhO1dZJ-w89FyqP=w600"
-          alt="Field Vision"
-        />
+        {#if highlight}
+          <img class="w-full rounded-md" src={highlight.image} alt="Field Vision" />
+        {:else}
+          <img
+            class="w-full rounded-md"
+            src="https://lh3.googleusercontent.com/iJoQL40UzY-pBR7ijC7fXYYiKCqHnLo24_WLmwFsItCv3q5K3Mya0wMDy32fUvO9pHg0KBfrnpaU2Cf-pptQOzhO1dZJ-w89FyqP=w600"
+            alt="Field Vision"
+          />
+        {/if}
       </div>
       {#if highlight}
         <div>

@@ -41,7 +41,7 @@
       tokens.push({ tokenId, tokenURI, owner });
     }
     const promises = tokens
-      .filter((t) => t.owner === data.contract.address && t.tokenId.toNumber() !== 1)
+      .filter((t) => t.owner === data.contract.address)
       .map(({ tokenId, tokenURI }) =>
         fetch(ipfsUrl(tokenURI))
           .then((r) => r.json())
