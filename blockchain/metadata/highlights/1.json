@@ -1,0 +1,18 @@
+{
+  "description": "A line drive",
+  "external_url": "https://mlbverse.vercel.app/",
+  "animation_url": "https://ipfs.io/ipfs/QmZ3Auf1rJutNLNZv7xvx1KmGmqoda1BDZvKZwDs9imXH1",
+  "image": "https://storage.googleapis.com/opensea-prod.appspot.com/puffs/3.png",
+  "name": "Creeefs hits a line drive to Derek Jeter",
+  "attributes": [
+    {
+      "display_type": "date",
+      "trait_type": "Pitch Time",
+      "value": 1546360800
+    },
+    {
+      "trait_type": "Hit Type", 
+      "value": "Home Run"
+    }
+  ]
+}

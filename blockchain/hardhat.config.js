@@ -43,6 +43,22 @@ task("mint", "Mints an NFT")
     await mintToken(contract, ownerAddress, contentHash);
   });
 
+task(
+  "setTicketsContract",
+  "Set the tickets contract address in the highlights contract"
+)
+  .addParam("contractAddress", "Address of the deployed tickets contract")
+  .setAction(async taskArgs => {
+    const { contractAddress } = taskArgs;
+    const {
+      contract: { address, abi },
+    } = await loadDeploymentInfo("Highlights");
+    const provider = new ethers.providers.JsonRpcProvider();
+    const contract = new ethers.Contract(address, abi, provider.getSigner());
+    const result = await contract.setTicketsContract(contractAddress);
+    console.log(result);
+  });
+
 function deploymentInfo(hardhat, contract) {
   return {
     network: hardhat.network.name,
