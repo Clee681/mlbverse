@@ -74,7 +74,7 @@
 </script>
 
 {#if $connected}
-  <div class="px-32 flex flex-col lg:flex-row gap-4 mt-12">
+  <div class="px-32 flex flex-col lg:flex-row gap-4 my-12">
     <div class="flex flex-col flex-1 gap-4">
       <div class="w-full border border-gray-300 rounded-md">
         {#if highlight}
