@@ -76,18 +76,10 @@
 {#if $connected}
   <div class="px-32 flex flex-col lg:flex-row gap-4 my-12">
     <div class="flex flex-col flex-1 gap-4">
-      <div class="w-full border border-gray-300 rounded-md">
-        {#if highlight}
-          <img class="w-full rounded-md" src={highlight.image} alt="Field Vision" />
-        {:else}
-          <img
-            class="w-full rounded-md"
-            src="https://lh3.googleusercontent.com/iJoQL40UzY-pBR7ijC7fXYYiKCqHnLo24_WLmwFsItCv3q5K3Mya0wMDy32fUvO9pHg0KBfrnpaU2Cf-pptQOzhO1dZJ-w89FyqP=w600"
-            alt="Field Vision"
-          />
-        {/if}
-      </div>
       {#if highlight}
+        <div class="w-full border border-gray-300 rounded-md">
+          <img class="w-full rounded-md" src={highlight.image} alt="Field Vision" />
+        </div>
         <div>
           <h2 class="text-3xl text-gray-700 font-semibold my-2">{highlight.name}</h2>
           <h6 class="text-sm text-gray-500 font-semibold">
@@ -95,13 +87,11 @@
             <span class="text-blue-400">{highlightOwner}</span>
           </h6>
         </div>
-      {/if}
-      <div class="w-full border border-gray-300 rounded-md">
-        <h2 class="p-4 font-semibold text-gray-700 border-b border-gray-300">Description</h2>
-        {#if highlight}
+        <div class="w-full border border-gray-300 rounded-md">
+          <h2 class="p-4 font-semibold text-gray-700 border-b border-gray-300">Description</h2>
           <p class="p-4 text-sm text-gray-500">{highlight.description}</p>
-        {/if}
-      </div>
+        </div>
+      {/if}
     </div>
     <div class="flex flex-col flex-1">
       <div class="w-full border border-gray-300 rounded-md">
