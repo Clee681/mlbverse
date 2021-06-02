@@ -28,10 +28,19 @@ export namespace StatsApiNS {
 export namespace MLBverseNS {
   export type TicketsData = {
     gamePk: string;
-    contract: TicketContract;
+    contract: Contract;
   };
 
-  export type TicketContract = {
+  export type ShopData = {
+    contract: Contract;
+  };
+
+  export type ShopItemData = {
+    highlights: Contract;
+    tickets: Contract;
+  };
+
+  export type Contract = {
     address: string;
     signerAddress: string;
     abi: string[];
@@ -42,5 +51,13 @@ export namespace MLBverseNS {
     section: number;
     row: number;
     seat: number;
+  };
+
+  export type Highlight = {
+    name: string;
+    description: string;
+    external_url: string;
+    animation_url: string;
+    image: string;
   };
 }

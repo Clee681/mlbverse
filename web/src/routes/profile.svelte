@@ -47,7 +47,7 @@
   }
 </script>
 
-<h2 class="text-center mt-20 text-4xl font-semibold text-gray-700">My Tickets</h2>
+<h2 class="text-3xl mt-12 mb-8 text-center font-bold text-gray-700">My Tickets</h2>
 
 {#each tickets as ticket}
   <div class="text-center py-4 mt-4 mx-auto border border-gray-500 rounded-md w-52 text-gray-500">

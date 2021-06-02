@@ -58,7 +58,7 @@
 {#if $connected}
   <div class="flex items-center">
     <span class="rounded-full h-2 w-2 bg-green-400 mr-2" />
-    <div class="text-sm text-green-400 mr-5">Wallet Connected</div>
+    <div class="text-sm text-green-400 mr-2">Wallet Connected</div>
     <div class="relative inline-block text-right text-gray-500" bind:this={menuEl}>
       <div>
         <button

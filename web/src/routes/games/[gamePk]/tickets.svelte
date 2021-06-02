@@ -5,7 +5,7 @@
       const body = await resp.json();
       return { props: { data: body } };
     } else {
-      return { props: { data: { not: "found" } } };
+      return { props: { error: "Failed to fetch /api/games/:gamePk/tickets" } };
     }
   }
 </script>
@@ -15,6 +15,7 @@
   import { ethers } from "ethers";
   import type { MLBverseNS } from "$lib/types";
   import TicketTableRow from "$lib/components/TicketTableRow.svelte";
+  import PleaseConnect from "$lib/components/PleaseConnect.svelte";
   import { ipfsUrl } from "$lib/utils";
 
   export let data: MLBverseNS.TicketsData;
@@ -85,7 +86,7 @@
     </table>
   </div>
 {:else}
-  <p>Please connect with your MetaMask wallet</p>
+  <PleaseConnect />
 {/if}
 
 <style lang="postcss">
