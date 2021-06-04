@@ -21,7 +21,7 @@
   <td class="td">{ticket.section}</td>
   <td class="td">{ticket.row}</td>
   <td class="td">{ticket.seat}</td>
-  <td class="td">$100.00</td>
+  <td class="td">1 Ether</td>
   <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
     <button
       class="text-indigo-600 w-16 hover:text-indigo-900 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
