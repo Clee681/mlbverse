@@ -16,6 +16,7 @@
   import { ethProvider, connected, currentAccount } from "$lib/stores/ethProvider";
   import PleaseConnect from "$lib/components/PleaseConnect.svelte";
   import { ethers } from "ethers";
+  import { data as contractData } from "$lib/contractData";
 
   export let data: MLBverseNS.ShopItemData;
   export let highlightTokenId: number;
@@ -36,6 +37,7 @@
       setHighlight();
     }
   }
+  $: isRedeemable = highlightOwner === contractData.highlights.address;
 
   async function getUnredeemedTickets() {
     const currentAccountTicketCount = await ticketsContract.balanceOf($currentAccount);
@@ -98,7 +100,21 @@
     <div class="flex flex-col flex-1">
       <div class="w-full border border-gray-300 rounded-md">
         <h2 class="p-4 font-semibold text-gray-700 border-b border-gray-300">Redeem With Tickets</h2>
-        {#if tickets.length === 0}
+        {#if !isRedeemable}
+          <div class="p-4">
+            <div class="px-4 py-2 mb-2 inline-block text-xs uppercase text-white bg-gray-500 rounded-full">
+              Not Redeemable
+            </div>
+            <p class="p-2 text-sm text-gray-500">
+              This highlight has already been redeemed. If interested, you can place an offer to the current owner on
+              <a
+                class="text-blue-600"
+                href="https://testnets.opensea.io/assets/{contractData.highlights.address}/{highlightTokenId}"
+                target="_blank">OpenSea</a
+              >.
+            </p>
+          </div>
+        {:else if tickets.length === 0}
           <p class="p-4 text-sm text-gray-500">
             Sorry, you have no redeemible tickets. You can purchase ticket stubs in our marketplace or get your own
             ticket stub from attending a game.
