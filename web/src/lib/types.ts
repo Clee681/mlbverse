@@ -53,6 +53,8 @@ export namespace MLBverseNS {
     seat: number;
   };
 
+  export type TicketWithRedemptionStatus = Ticket & { isRedeemed: boolean };
+
   export type Highlight = {
     name: string;
     description: string;

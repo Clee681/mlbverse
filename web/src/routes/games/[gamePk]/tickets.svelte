@@ -93,8 +93,4 @@
   .table-header {
     @apply px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider;
   }
-
-  .table-data {
-    @apply px-6 py-4 whitespace-nowrap text-sm text-gray-800;
-  }
 </style>
