@@ -59,7 +59,7 @@
       class="w-72 flex flex-col justify-between border border-gray-300 rounded-md p-2 hover:transform hover:-translate-y-1 hover:shadow-md cursor-pointer"
       on:click={() => goto(`/shop/${highlight.tokenId.toNumber()}`)}
     >
-      <img class="mb-2" src={highlight["image"]} alt={highlight["description"]} />
+      <img class="mb-2 h-5/6 object-cover" src={highlight["image"]} alt={highlight["description"]} />
       <div>
         <p class="text-sm text-gray-400 w-full overflow-ellipsis whitespace-nowrap overflow-hidden">
           {highlight["name"]}
