@@ -56,14 +56,16 @@
 <div class="flex flex-wrap px-8 lg:px-32 gap-8">
   {#each highlights as highlight}
     <div
-      class="w-64 border border-gray-300 rounded-md p-2 hover:transform hover:-translate-y-1 hover:shadow-md hover:cursor-pointer"
+      class="w-72 flex flex-col justify-between border border-gray-300 rounded-md p-2 hover:transform hover:-translate-y-1 hover:shadow-md cursor-pointer"
       on:click={() => goto(`/shop/${highlight.tokenId.toNumber()}`)}
     >
       <img class="mb-2" src={highlight["image"]} alt={highlight["description"]} />
-      <p class="text-sm text-gray-400 w-full overflow-ellipsis whitespace-nowrap overflow-hidden">
-        {highlight["name"]}
-      </p>
-      <p class="text-sm font-semibold text-gray-700">FieldVision #{highlight.tokenId.toNumber()}</p>
+      <div>
+        <p class="text-sm text-gray-400 w-full overflow-ellipsis whitespace-nowrap overflow-hidden">
+          {highlight["name"]}
+        </p>
+        <p class="text-sm font-semibold text-gray-700">FieldVision #{highlight.tokenId.toNumber()}</p>
+      </div>
     </div>
   {/each}
 </div>
