@@ -49,7 +49,10 @@
         continue;
       }
       const tokenURI = await ticketsContract.tokenURI(tokenId);
-      ticketTokens.push({ tokenId, tokenURI });
+      // Only push the newer tickets (tech debt bc I changed to OpenSea metadata format)
+      if (tokenId.toNumber() >= 12) {
+        ticketTokens.push({ tokenId, tokenURI });
+      }
     }
     const promises = ticketTokens.map(({ tokenId, tokenURI }) =>
       fetch(ipfsUrl(tokenURI))
@@ -73,6 +76,10 @@
     const r = await highlightsContract.redeem(ticketTokenId, highlightTokenId);
     console.log(r);
   }
+
+  const getAttr = (ticket: MLBverseNS.Ticket, attr: string) => {
+    return ticket.attributes.find((a) => a["trait_type"] === attr)["value"];
+  };
 </script>
 
 {#if $connected}
@@ -122,7 +129,12 @@
         {:else}
           {#each tickets as t}
             <div class="flex items-baseline justify-between px-6 py-4 text-sm">
-              <div class="text-gray-400">{`${t.section}-${t.row}-${t.seat}`}</div>
+              <div class="text-gray-400">
+                {`${getAttr(t, "GamePk")} (${getAttr(t, "Section Number")}-${getAttr(t, "Row Number")}-${getAttr(
+                  t,
+                  "Seat Number"
+                )})`}
+              </div>
               <button class="uppercase text-purple-500 focus:outline-none" on:click={() => redeem(t.tokenId)}
                 >Redeem</button
               >

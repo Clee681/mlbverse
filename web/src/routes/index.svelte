@@ -2,7 +2,7 @@
   import { STATS_API_BASE_URL } from "$lib/constants";
 
   export async function load({}) {
-    const res = await fetch(`${STATS_API_BASE_URL}/teams?sportId=1`);
+    const res = await fetch(`${STATS_API_BASE_URL}/api/v1/teams?sportId=1`);
     if (res.ok) {
       const json = await res.json();
       return { props: { teams: json.teams } };
@@ -14,6 +14,7 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
   import type { StatsApiNS } from "$lib/types";
+  import TeamLogo from "$lib/components/TeamLogo.svelte";
 
   export let teams: StatsApiNS.Team[];
 </script>
@@ -27,11 +28,7 @@
         class="w-full px-4 py-6 border border-gray-200 rounded-md cursor-pointer hover:shadow transform hover:-translate-y-1"
         on:click={() => goto(`/choose-game/${team.id}`)}
       >
-        <img
-          class="w-16 h-16 mx-auto"
-          src={`https://www.mlbstatic.com/team-logos/team-cap-on-light/${team.id}.svg`}
-          alt={`${team.abbreviation} Logo`}
-        />
+        <TeamLogo class="w-16 h-16 mx-auto" {team} />
         <div class="mt-4 text-center text-gray-700">{team.name}</div>
       </div>
     {/each}

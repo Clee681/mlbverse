@@ -19,7 +19,10 @@
       const tokenId = await $ticketsContract.tokenOfOwnerByIndex($currentAccount, i);
       const tokenURI = await $ticketsContract.tokenURI(tokenId);
       const isRedeemed = await $highlightsContract.redeemedTickets(tokenId);
-      tokens.push({ tokenId, tokenURI, isRedeemed });
+      // Only push the newer tickets (tech debt bc I changed to OpenSea metadata format)
+      if (tokenId.toNumber() >= 12) {
+        tokens.push({ tokenId, tokenURI, isRedeemed });
+      }
     }
     const ticketPromises = tokens.map(({ tokenId, tokenURI, isRedeemed }) =>
       fetch(ipfsUrl(tokenURI))
@@ -28,6 +31,10 @@
     );
     Promise.all(ticketPromises).then((ts) => (tickets = ts));
   }
+
+  const getAttr = (ticket: MLBverseNS.Ticket, attr: string) => {
+    return ticket.attributes.find((a) => a["trait_type"] === attr)["value"];
+  };
 </script>
 
 <h2 class="text-3xl mt-12 mb-8 text-center font-bold text-gray-700">My Tickets</h2>
@@ -36,6 +43,7 @@
     <table class="min-w-full divide-y divide-gray-200">
       <thead class="bg-gray-50">
         <tr>
+          <th scope="col" class="table-header">GamePk</th>
           <th scope="col" class="table-header">Section</th>
           <th scope="col" class="table-header">Row</th>
           <th scope="col" class="table-header">Seat</th>
@@ -47,9 +55,10 @@
       <tbody class="bg-white divide-y divide-gray-200">
         {#each tickets as ticket}
           <tr>
-            <td class="td">{ticket.section}</td>
-            <td class="td">{ticket.row}</td>
-            <td class="td">{ticket.seat}</td>
+            <td class="td">{getAttr(ticket, "GamePk")}</td>
+            <td class="td">{getAttr(ticket, "Section Number")}</td>
+            <td class="td">{getAttr(ticket, "Row Number")}</td>
+            <td class="td">{getAttr(ticket, "Seat Number")}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-800">
               {ticket.isRedeemed ? "Yes" : "No"}
             </td>

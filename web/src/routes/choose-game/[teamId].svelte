@@ -7,9 +7,11 @@
     const teamId = page.params["teamId"];
     const start = new Date();
     const end = add(start, { days: 21 });
-    const teamReq = fetch(`${STATS_API_BASE_URL}/teams/${teamId}`);
+    const teamReq = fetch(`${STATS_API_BASE_URL}/api/v1/teams/${teamId}`);
     const scheduleReq = fetch(
-      `${STATS_API_BASE_URL}/schedule?sportId=1&startDate=${fmtDate(start)}&endDate=${fmtDate(end)}&teamId=${teamId}`
+      `${STATS_API_BASE_URL}/api/v1/schedule?sportId=1&startDate=${fmtDate(start)}&endDate=${fmtDate(
+        end
+      )}&teamId=${teamId}`
     );
     return Promise.all([teamReq, scheduleReq]).then(async ([teamResp, scheduleResp]) => {
       if (teamResp.ok && scheduleResp.ok) {
@@ -27,8 +29,6 @@
   import type { StatsApiNS } from "$lib/types";
   import { goto } from "$app/navigation";
   import { format, parseISO } from "date-fns";
-
-  type Game = StatsApiNS.Game & { gameDate: Date };
 
   export let games: StatsApiNS.Game[];
 
@@ -64,11 +64,11 @@
           <h4 class="font-medium">{g.teams.away.team.name} @ {g.teams.home.team.name}</h4>
           <h6 class="text-gray-400 text-sm uppercase">{g.venue.name}</h6>
         </div>
-        <div class="">
+        <div>
           <a
             href="/games/{g.gamePk}/tickets"
             class="px-4 py-2 text-sm text-white border rounded-md bg-gradient-to-r from-purple-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 focus:outline-none"
-            >View Tickets</a
+            >Redeem NFT Ticket</a
           >
         </div>
       </div>

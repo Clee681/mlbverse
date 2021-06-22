@@ -48,9 +48,15 @@ export namespace MLBverseNS {
 
   export type Ticket = {
     tokenId: string;
+    attributes: Attribute[];
     section: number;
     row: number;
     seat: number;
+  };
+
+  export type Attribute = {
+    trait_type: string;
+    value: string;
   };
 
   export type TicketWithRedemptionStatus = Ticket & { isRedeemed: boolean };
