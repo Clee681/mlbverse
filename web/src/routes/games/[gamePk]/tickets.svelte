@@ -91,7 +91,7 @@
         console.error(e);
       }
     }
-
+    code = "";
     redeemLoading = false;
   }
 </script>
